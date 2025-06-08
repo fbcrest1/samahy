@@ -90,10 +90,10 @@ $(document).ready(function () {
       } else {
         // Trên PC, sử dụng absolute position
         menu.css({
-          position: 'absolute',
-          left: '50%',
-          top: '40px',
-          transform: 'translateX(-50%)',
+          position: 'fixed',
+          left: left + 'px',
+          top: top + 'px',
+          transform: 'none',
           zIndex: 9999
         });
       }
