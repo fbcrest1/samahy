@@ -130,14 +130,16 @@ hoặc khi hover vào submenu của nó.*/
   display: inline-block;
   text-align: center;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* cuộn mượt trên iOS */
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .excel-style-table {
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  table-layout: auto; /* Bắt buộc để cột cuối có thể co giãn */
+  table-layout: fixed; /* Thay đổi từ auto sang fixed */
+  width: 100%;
 }
 
 .excel-style-table th,
@@ -147,7 +149,42 @@ hoặc khi hover vào submenu của nó.*/
   text-align: left;
   vertical-align: top;
   position: relative;
-  min-width: 100px;
+  overflow: hidden; /* Thêm overflow hidden */
+  text-overflow: ellipsis; /* Thêm text overflow */
+  white-space: nowrap; /* Giữ nguyên white-space nowrap */
+}
+
+/* Định nghĩa độ rộng cố định cho từng cột */
+.excel-style-table th:nth-child(1),
+.excel-style-table td:nth-child(1) {
+  width: 120px; /* Cột hình ảnh */
+}
+
+.excel-style-table th:nth-child(2),
+.excel-style-table td:nth-child(2) {
+  width: 200px; /* Cột tên */
+}
+
+.excel-style-table th:nth-child(3),
+.excel-style-table td:nth-child(3) {
+  width: 120px; /* Cột phái/hệ */
+}
+
+.excel-style-table th:nth-child(4),
+.excel-style-table td:nth-child(4) {
+  width: 100px; /* Cột loại */
+}
+
+.excel-style-table th:nth-child(5),
+.excel-style-table td:nth-child(5) {
+  width: auto; /* Cột chi tiết/mô tả */
+}
+
+/* Cho phép wrap text ở cột chi tiết/mô tả */
+.excel-style-table th:nth-child(5),
+.excel-style-table td:nth-child(5) {
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .excel-style-table thead th {
@@ -338,13 +375,39 @@ hoặc khi hover vào submenu của nó.*/
 
   .excel-style-table {
     width: 100%;
+    table-layout: fixed; /* Giữ nguyên table-layout fixed */
   }
 
   .excel-style-table th,
   .excel-style-table td {
-    min-width: 100px;
+    min-width: unset; /* Bỏ min-width */
     font-size: 14px;
-    white-space: nowrap;
+  }
+
+  /* Giữ nguyên độ rộng cột như trên PC */
+  .excel-style-table th:nth-child(1),
+  .excel-style-table td:nth-child(1) {
+    width: 120px;
+  }
+
+  .excel-style-table th:nth-child(2),
+  .excel-style-table td:nth-child(2) {
+    width: 200px;
+  }
+
+  .excel-style-table th:nth-child(3),
+  .excel-style-table td:nth-child(3) {
+    width: 120px;
+  }
+
+  .excel-style-table th:nth-child(4),
+  .excel-style-table td:nth-child(4) {
+    width: 100px;
+  }
+
+  .excel-style-table th:nth-child(5),
+  .excel-style-table td:nth-child(5) {
+    width: auto;
   }
 
   /* Video mobile */
