@@ -58,30 +58,43 @@ $(document).ready(function () {
       buildFilter(columnIndex);
       menu.addClass('show');
 
-      // Điều chỉnh vị trí menu trên mobile
+      // Điều chỉnh vị trí menu
+      const btnRect = this.getBoundingClientRect();
+      const menuWidth = menu.width();
+      const menuHeight = menu.height();
+      
+      // Tính toán vị trí để menu không bị tràn màn hình
+      let left = btnRect.left;
+      let top = btnRect.bottom + 5;
+      
+      // Nếu menu sẽ bị tràn bên phải
+      if (left + menuWidth > window.innerWidth) {
+        left = window.innerWidth - menuWidth - 10;
+      }
+      
+      // Nếu menu sẽ bị tràn bên dưới
+      if (top + menuHeight > window.innerHeight) {
+        top = btnRect.top - menuHeight - 5;
+      }
+
+      // Điều chỉnh vị trí menu
       if (window.innerWidth <= 768) {
-        const btnRect = this.getBoundingClientRect();
-        const menuWidth = menu.width();
-        const menuHeight = menu.height();
-        
-        // Tính toán vị trí để menu không bị tràn màn hình
-        let left = btnRect.left;
-        let top = btnRect.bottom + 5;
-        
-        // Nếu menu sẽ bị tràn bên phải
-        if (left + menuWidth > window.innerWidth) {
-          left = window.innerWidth - menuWidth - 10;
-        }
-        
-        // Nếu menu sẽ bị tràn bên dưới
-        if (top + menuHeight > window.innerHeight) {
-          top = btnRect.top - menuHeight - 5;
-        }
-        
+        // Trên mobile, sử dụng fixed position
         menu.css({
           position: 'fixed',
           left: left + 'px',
-          top: top + 'px'
+          top: top + 'px',
+          transform: 'none',
+          zIndex: 9999
+        });
+      } else {
+        // Trên PC, sử dụng absolute position
+        menu.css({
+          position: 'absolute',
+          left: '50%',
+          top: '40px',
+          transform: 'translateX(-50%)',
+          zIndex: 9999
         });
       }
     }
